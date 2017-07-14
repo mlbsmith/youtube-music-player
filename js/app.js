@@ -2,14 +2,17 @@ $(function() {
 
 });
 
-function init() {
-	defineRequest();
-}
+$('#1').click(function(){
+    defineRequest(1);
+});
 
+$('#2').click(function(){
+    defineRequest(2);
+});
 
-function sendRequest() {
-  	defineRequest();
-  }
+$('#3').click(function(){
+    defineRequest(3);
+});
 
 
 function createResource(properties) {
@@ -54,9 +57,13 @@ function removeEmptyParams(params) {
 
 function executeRequest(request) {
     request.execute(function(response) {
-      id = response.items[0].id;
+      maxIndex = response.items.length - 1;
+      i = Math.floor(Math.random() * maxIndex);
+      playlistId = response.items[i].id.playlistId;
       $.get("player/player.html", function(data) {
-        $("#results").append(data);
+        embeddedVideo = data.replace('{{id}}',playlistId);
+        $("#results").empty();
+        $("#results").append(embeddedVideo);
       });
 
     });
@@ -84,12 +91,21 @@ function buildApiRequest(requestMethod, path, parameters, properties = null) {
   }
 
   
-function defineRequest() {
+function defineRequest(requestId) {
+  if (requestId == 1) {
+    query = 'slow vibes';
+  } else if (requestId == 2) {
+    query = 'indie apartment party';
+  } else if (requestId == 3) {
+    query = 'instrumental';
+  }
 	buildApiRequest('GET',
-                '/youtube/v3/playlists',
-                {'channelId': 'UC_x5XG1OV2P6uZZ5FSM9Ttw',
-                 'maxResults': '1',
+                '/youtube/v3/search',
+                {'q': query,
+                 'maxResults': '5',
                  'part': 'snippet',
+                 'order': 'viewCount',
+                 'type': 'playlist',
                  'key': 'AIzaSyCc5f8x3S-0X3eBeZ5eAZ-2lO9qd4fB3eY' });
 
   }

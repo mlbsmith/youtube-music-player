@@ -1,1 +1,31 @@
-/* style.css */
+.player {
+	display: flex;
+	justify-content: center;
+}
+
+.header {
+	text-align: center;
+}
+
+.options-row {
+	display: -webkit-flex;
+	display: flex;
+	justify-content: space-around;
+	padding: 10px;
+}
+
+.option-button {
+	flex-grow: 1;
+	max-width: 200px;
+	background-color: #fff;
+	border: 1px solid #000;
+	color: #0a0a0a;
+	box-shadow: 2px 2px 2px #000;
+	padding: 20px;
+	text-align: center;
+}
+
+.option-button:hover {
+	cursor: pointer;
+	background-color: #d3d3d3;
+}
