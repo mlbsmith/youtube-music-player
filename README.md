@@ -1,2 +1,4 @@
 # youtube-music-player
-Music player using youtube api
+Free music player using youtube api
+
+Courtesty of: Mitchell
