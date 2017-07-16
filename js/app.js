@@ -14,6 +14,17 @@ $('#3').click(function(){
     defineRequest(3);
 });
 
+$('#4').click(function(){
+    defineRequest(4);
+});
+
+$('#5').click(function(){
+    defineRequest(5);
+});
+
+$('#6').click(function(){
+    defineRequest(6);
+});
 
 function createResource(properties) {
     var resource = {};
@@ -64,6 +75,9 @@ function executeRequest(request) {
         embeddedVideo = data.replace('{{id}}',playlistId);
         $("#results").empty();
         $("#results").append(embeddedVideo);
+        if (document.getElementById("distractionFree").checked) {
+          $("#results").css("display","none");
+        }
       });
 
     });
@@ -92,12 +106,25 @@ function buildApiRequest(requestMethod, path, parameters, properties = null) {
 
   
 function defineRequest(requestId) {
-  if (requestId == 1) {
-    query = 'slow vibes';
-  } else if (requestId == 2) {
-    query = 'indie apartment party';
-  } else if (requestId == 3) {
-    query = 'instrumental';
+  switch (requestId) {
+    case 1:
+      query = 'slow vibes';
+      break;
+    case 2:  
+      query = 'indie apartment party';
+      break;
+    case 3: 
+      query = 'instrumental';
+      break;
+    case 4:
+      query = 'edm';
+      break;
+    case 5:
+      query = 'movie soundtracks';
+      break;
+    case 6:
+      query = 'top 40';
+      break;
   }
 	buildApiRequest('GET',
                 '/youtube/v3/search',
