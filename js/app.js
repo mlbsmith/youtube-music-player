@@ -1,5 +1,9 @@
-$(function() {
+// todo: refactor button logic to reduce number of functions
+// allow for toggling distraction-free mode
+// improve styling AMAP
+// eventually move to python or PHP framework (preferably Python)
 
+$(function() {
 });
 
 $('#1').click(function(){
@@ -25,6 +29,20 @@ $('#5').click(function(){
 $('#6').click(function(){
     defineRequest(6);
 });
+
+$('#7').click(function(){
+    defineRequest(7);
+});
+
+$('#8').click(function(){
+    defineRequest(8);
+});
+
+$('#9').click(function(){
+    defineRequest(9);
+});
+
+
 
 function createResource(properties) {
     var resource = {};
@@ -124,6 +142,15 @@ function defineRequest(requestId) {
       break;
     case 6:
       query = 'top 40';
+      break;
+    case 7:
+      query = 'johnny cash';
+      break;
+    case 8:
+      query = 'bob dylan';
+      break;
+    case 9:
+      query = 'simon and garfunkel';
       break;
   }
 	buildApiRequest('GET',
