@@ -1,7 +1,7 @@
 // todo: refactor button logic to reduce number of functions
 // allow for toggling distraction-free mode
 // improve styling AMAP
-// eventually move to python or PHP framework (preferably Python)
+// eventually move to python or PHP backend (preferably Python)
 
 $(function() {
 });
@@ -93,9 +93,6 @@ function executeRequest(request) {
         embeddedVideo = data.replace('{{id}}',playlistId);
         $("#results").empty();
         $("#results").append(embeddedVideo);
-        if (document.getElementById("distractionFree").checked) {
-          $("#results").css("display","none");
-        }
       });
 
     });
@@ -163,3 +160,13 @@ function defineRequest(requestId) {
                  'key': 'AIzaSyCc5f8x3S-0X3eBeZ5eAZ-2lO9qd4fB3eY' });
 
   }
+
+  function distractionFreeCheck() {
+    if (document.getElementById("distractionFree").checked) {
+          $("#results").css("display","none");
+        } else {
+          $("#results").css("display","block");
+        }
+  }
+
+
