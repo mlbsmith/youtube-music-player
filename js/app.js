@@ -1,10 +1,21 @@
-// todo: refactor button logic to reduce number of functions
-// allow for toggling distraction-free mode
 // improve styling AMAP
-// eventually move to python or PHP backend (preferably Python)
+// eventually move to Python or PHP backend (preferably Python)
 
 $(function() {
 });
+
+function sendRequest(clickedObj) {
+  searchText = clickedObj.textContent;
+  defineRequest(searchText);
+}
+
+function distractionFreeCheck() {
+    if (document.getElementById("distractionFree").checked) {
+          $("#results").css("display","none");
+    } else {
+          $("#results").css("display","block");
+    }
+}
 
 
 function createResource(properties) {
@@ -36,7 +47,7 @@ function createResource(properties) {
       };
     }
     return resource;
-  }
+}
 
 function removeEmptyParams(params) {
     for (var p in params) {
@@ -45,7 +56,7 @@ function removeEmptyParams(params) {
       }
     }
     return params;
-  }
+}
 
 function executeRequest(request) {
     request.execute(function(response) {
@@ -59,7 +70,7 @@ function executeRequest(request) {
       });
 
     });
-  }
+}
 
 function buildApiRequest(requestMethod, path, parameters, properties = null) {
     var params = this.removeEmptyParams(parameters);
@@ -80,7 +91,7 @@ function buildApiRequest(requestMethod, path, parameters, properties = null) {
       });
     }
     this.executeRequest(request);
-  }
+}
 
   
 function defineRequest(query) {
@@ -92,15 +103,6 @@ function defineRequest(query) {
                  'order': 'viewCount',
                  'type': 'playlist',
                  'key': 'AIzaSyCc5f8x3S-0X3eBeZ5eAZ-2lO9qd4fB3eY' });
-
-  }
-
-function distractionFreeCheck() {
-    if (document.getElementById("distractionFree").checked) {
-          $("#results").css("display","none");
-        } else {
-          $("#results").css("display","block");
-        }
-  }
+}
 
 
