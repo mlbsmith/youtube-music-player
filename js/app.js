@@ -1,15 +1,10 @@
+// todo: refactor button logic to reduce number of functions
+// allow for toggling distraction-free mode
+// improve styling AMAP
+// eventually move to python or PHP backend (preferably Python)
+
 $(function() {
-
 });
-
-function init() {
-	defineRequest();
-}
-
-
-function sendRequest() {
-  	defineRequest();
-  }
 
 
 function createResource(properties) {
@@ -54,9 +49,13 @@ function removeEmptyParams(params) {
 
 function executeRequest(request) {
     request.execute(function(response) {
-      id = response.items[0].id;
+      maxIndex = response.items.length - 1;
+      i = Math.floor(Math.random() * maxIndex);
+      playlistId = response.items[i].id.playlistId;
       $.get("player/player.html", function(data) {
-        $("#results").append(data);
+        embeddedVideo = data.replace('{{id}}',playlistId);
+        $("#results").empty();
+        $("#results").append(embeddedVideo);
       });
 
     });
@@ -84,12 +83,24 @@ function buildApiRequest(requestMethod, path, parameters, properties = null) {
   }
 
   
-function defineRequest() {
+function defineRequest(query) {
 	buildApiRequest('GET',
-                '/youtube/v3/playlists',
-                {'channelId': 'UC_x5XG1OV2P6uZZ5FSM9Ttw',
-                 'maxResults': '1',
+                '/youtube/v3/search',
+                {'q': query,
+                 'maxResults': '5',
                  'part': 'snippet',
+                 'order': 'viewCount',
+                 'type': 'playlist',
                  'key': 'AIzaSyCc5f8x3S-0X3eBeZ5eAZ-2lO9qd4fB3eY' });
 
   }
+
+function distractionFreeCheck() {
+    if (document.getElementById("distractionFree").checked) {
+          $("#results").css("display","none");
+        } else {
+          $("#results").css("display","block");
+        }
+  }
+
+
